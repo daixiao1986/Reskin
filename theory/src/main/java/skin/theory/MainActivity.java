@@ -1,10 +1,7 @@
 package skin.theory;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.AttributeSet;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -28,12 +25,6 @@ public class MainActivity extends Activity {
             }
         });
 
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        return super.onCreateView(name, context, attrs);
     }
 
     private void reSkin() {
