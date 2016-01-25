@@ -34,7 +34,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
     Context mContext;
     LayoutInflater mLayoutInflater;
 
-    List<SkinItem> textViewTextColorList = new ArrayList<>();
+    List<TextViewTextColorItem> textViewTextColorList = new ArrayList<>();
 
     public SkinLayoutInflaterFactory(Activity activity) {
         mContext = activity;
@@ -118,7 +118,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
                     String attrValue = attrs.getAttributeValue(i);
                     if (attrValue.startsWith("@")) {
                         id = Integer.parseInt(attrValue.substring(1));
-                        textViewTextColorList.add(new SkinItem(view, id));
+                        textViewTextColorList.add(new TextViewTextColorItem((TextView) view, id));
                     }
                 }
             }
@@ -131,10 +131,8 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
      * @param suffix 新主题资源后缀名
      */
     public void reSkin(String suffix) {
-        for (SkinItem skinItem : textViewTextColorList) {
-            if (skinItem.view instanceof TextView) {
-                ((TextView) skinItem.view).setTextColor(getColor(skinItem.id, suffix));
-            }
+        for (TextViewTextColorItem skinItem : textViewTextColorList) {
+                skinItem.view.setTextColor(getColor(skinItem.id, suffix));
         }
     }
 
