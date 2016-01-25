@@ -18,6 +18,7 @@ import skin.lib.item.TextViewTextColorItem;
 import skin.lib.item.ViewBackgroundItem;
 
 /**
+ * 实现换肤的核心类
  * 实现LayoutInflater.Factory，通过实现其onCreateView()方法，手动创建好布局文件中的View。
  * 遍历自行实例化的View可记录需要修改主题的View及其属性，修改这些View的属性值即可实现换肤。
  * <p/>
@@ -26,15 +27,24 @@ import skin.lib.item.ViewBackgroundItem;
 public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
     private static final String TAG = "SkinLayoutInflaterFactory";
 
+    /**
+     * 皮肤主题后缀
+     */
     private static final String[] sSuffix = {
             "",
             "_night"
     };
 
+    /**
+     * 换肤支持的属性
+     */
     private static final String ATTR_TEXT_COLOR = "textColor";
     private static final String ATTR_SRC = "src";
     private static final String ATTR_BACKGROUND = "background";
 
+    /**
+     * 换肤支持的资源类型
+     */
     private static final String RES_DRAWABLE = "drawable";
     private static final String RES_COLOR = "color";
 
@@ -52,6 +62,9 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
     Context mContext;
     LayoutInflater mLayoutInflater;
 
+    /**
+     * 换肤支持的各类型item列表，创建View时添加到列表，换肤时遍历列表修改属性值
+     */
     private List<ViewBackgroundItem> mViewBackgroundItems = new ArrayList<>();
     private List<TextViewTextColorItem> mTextViewTextColorItems = new ArrayList<>();
     private List<ImageViewSrcItem> mImageViewSrcItems = new ArrayList<>();
@@ -208,6 +221,14 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
         return mContext.getResources().getDrawable(newResId);
     }
 
+    /**
+     * 获取新资源id
+     *
+     * @param oldResId 旧资源id
+     * @param suffix   新主题资源命名的后缀
+     * @param defType  资源类型
+     * @return 新资源id
+     */
     private int getNewId(int oldResId, String suffix, String defType) {
         String oldResName = mContext.getResources().getResourceEntryName(oldResId);
         String newResName = oldResName + suffix;
@@ -215,6 +236,9 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
                 .getPackageName());
     }
 
+    /**
+     * 清空记录换肤item的列表
+     */
     public void clear() {
         mViewBackgroundItems.clear();
         mTextViewTextColorItems.clear();

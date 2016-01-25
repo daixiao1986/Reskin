@@ -3,6 +3,11 @@ package skin.lib;
 import android.app.Activity;
 import android.os.Bundle;
 
+/**
+ * 换肤基类Activity
+ * <p/>
+ * Created by fengshzh on 1/21/16.
+ */
 public abstract class BaseActivity extends Activity {
 
     private SkinLayoutInflaterFactory skinLayoutInflaterFactory;
@@ -14,8 +19,6 @@ public abstract class BaseActivity extends Activity {
 
         skinLayoutInflaterFactory = new SkinLayoutInflaterFactory(this);
         getLayoutInflater().setFactory(skinLayoutInflaterFactory);
-
-
     }
 
     @Override
