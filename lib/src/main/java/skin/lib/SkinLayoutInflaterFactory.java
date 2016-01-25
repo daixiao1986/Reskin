@@ -49,13 +49,12 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
             "android.view."
     };
 
-
     Context mContext;
     LayoutInflater mLayoutInflater;
 
-    private static List<ViewBackgroundItem> mViewBackgroundItems = new ArrayList<>();
-    private static List<TextViewTextColorItem> mTextViewTextColorItems = new ArrayList<>();
-    private static List<ImageViewSrcItem> mImageViewSrcItems = new ArrayList<>();
+    private List<ViewBackgroundItem> mViewBackgroundItems = new ArrayList<>();
+    private List<TextViewTextColorItem> mTextViewTextColorItems = new ArrayList<>();
+    private List<ImageViewSrcItem> mImageViewSrcItems = new ArrayList<>();
 
     public SkinLayoutInflaterFactory(Activity activity) {
         mContext = activity;
