@@ -1,5 +1,6 @@
 package skin.lib;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,17 +15,16 @@ public class SkinManager {
      */
     public static SkinTheme theme = SkinTheme.DEFAULT;
 
-    // TODO: fengshzh 1/22/16 Activity弱引用
     /**
      * 添加到换肤管理器的Activity列表
      */
-    static List<BaseActivity> activityList = new ArrayList<>();
+    static List<WeakReference<BaseActivity>> activityList = new ArrayList<>();
 
     /**
      * 向换肤管理器注册Activity
      */
     public static void register(BaseActivity activity) {
-        activityList.add(activity);
+        activityList.add(new WeakReference<>(activity));
     }
 
     /**
@@ -46,8 +46,11 @@ public class SkinManager {
 
         theme = newTheme;
 
-        for (BaseActivity activity : activityList) {
-            activity.reSkin();
+        for (WeakReference<BaseActivity> ref : activityList) {
+            BaseActivity activity = ref.get();
+            if (activity != null) {
+                activity.reSkin();
+            }
         }
     }
 
