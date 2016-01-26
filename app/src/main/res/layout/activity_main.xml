@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,23 +12,29 @@
         android:layout_height="wrap_content"
         android:text="Change Theme"/>
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/textColor"
-        android:text="textColor and background color"
-        android:textColor="@color/textColor"/>
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    <TextView
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/image"
+            android:text="background drawable"
+            android:textColor="@color/textColor"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image"/>
+
+    </RelativeLayout>
+
+    <skin.demo.SkinnableView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/image"
-        android:text="background drawable"
-        android:textColor="@color/textColor"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/image"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
