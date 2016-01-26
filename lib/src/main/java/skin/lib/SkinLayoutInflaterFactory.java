@@ -28,14 +28,6 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
     private static final String TAG = "SkinLayoutInflaterFactory";
 
     /**
-     * 皮肤主题后缀
-     */
-    private static final String[] sSuffix = {
-            "",
-            "_night"
-    };
-
-    /**
      * 换肤支持的属性
      */
     private static final String ATTR_TEXT_COLOR = "textColor";
@@ -176,22 +168,27 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
         // TODO: fengshzh 1/21/16 出意外不更新View的该属性
 
         for (TextViewTextColorItem item : mTextViewTextColorItems) {
-            item.view.setTextColor(getColor(item.id, sSuffix[SkinManager.theme.ordinal()
-                    ]));
+            TextView textView = item.view.get();
+            if (textView != null) {
+                textView.setTextColor(getColor(item.id, SkinManager.theme.suffix));
+            }
         }
 
         for (ImageViewSrcItem item : mImageViewSrcItems) {
-            item.view.setImageDrawable(getDrawable(item.id, sSuffix[SkinManager.theme.ordinal()
-                    ]));
+            ImageView imageView = item.view.get();
+            if (imageView != null) {
+                imageView.setImageDrawable(getDrawable(item.id, SkinManager.theme.suffix));
+            }
         }
 
         for (ViewBackgroundItem item : mViewBackgroundItems) {
-            if (item.typeName.equals(RES_COLOR)) {
-                item.view.setBackgroundColor(getColor(item.id, sSuffix[SkinManager.theme.ordinal()
-                        ]));
-            } else if (item.typeName.equals(RES_DRAWABLE)) {
-                item.view.setBackgroundDrawable(getDrawable(item.id, sSuffix[SkinManager.theme
-                        .ordinal()]));
+            View view = item.view.get();
+            if (view != null) {
+                if (item.typeName.equals(RES_COLOR)) {
+                    view.setBackgroundColor(getColor(item.id, SkinManager.theme.suffix));
+                } else if (item.typeName.equals(RES_DRAWABLE)) {
+                    view.setBackgroundDrawable(getDrawable(item.id, SkinManager.theme.suffix));
+                }
             }
         }
 
@@ -232,8 +229,8 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory {
     private int getNewId(int oldResId, String suffix, String defType) {
         String oldResName = mContext.getResources().getResourceEntryName(oldResId);
         String newResName = oldResName + suffix;
-        return mContext.getResources().getIdentifier(newResName, defType, mContext
-                .getPackageName());
+        return mContext.getResources().getIdentifier(newResName, defType, mContext.getPackageName
+                ());
     }
 
     /**

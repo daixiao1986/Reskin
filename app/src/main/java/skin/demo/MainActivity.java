@@ -13,9 +13,6 @@ import skin.lib.Skinable.Skinnable;
 import skin.lib.Skinable.TextColorAware;
 
 public class MainActivity extends BaseActivity {
-
-    private boolean useNight = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +21,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.change_theme).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SkinManager.reSkin(useNight ? SkinTheme.NIGHT : SkinTheme.DEFAULT);
-                useNight = !useNight;
+                SkinManager.reSkin(SkinManager.theme == SkinTheme.DEFAULT ? SkinTheme.NIGHT : SkinTheme.DEFAULT);
             }
         });
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.root);
