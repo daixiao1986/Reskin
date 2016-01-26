@@ -17,7 +17,7 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.change_theme).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SkinManager.reSkin(SkinTheme.NIGHT);
+                SkinManager.reSkin(SkinManager.theme == SkinTheme.DEFAULT ? SkinTheme.NIGHT : SkinTheme.DEFAULT);
             }
         });
     }
